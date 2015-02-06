@@ -146,6 +146,6 @@ for packageName in packages:
                 print "\t\t\tFrom URL: ", packageUrl
                 downloadFolder = baseFolder + packageName + os.path.sep + release + os.path.sep + target + os.path.sep
                 print "\t\t\tTo folder: ", downloadFolder
-                #downloadPackage(packageUrl, downloadFolder)
+                downloadPackage(packageUrl, downloadFolder)
 
 print "Downloads completed!"

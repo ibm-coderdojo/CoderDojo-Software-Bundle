@@ -10,7 +10,7 @@ if not os.path.exists(baseFolder):
     '''Check if the ~/Downloads/CoderDojoSoftware exists and eventually create it'''
     os.makedirs(baseFolder)
 
-def downloadPackage(packageUrl, downloadFolder):
+def downloadPackage(packageUrl, downloadFolder, fileName=""):
     '''Download a package archive from the network
     
     Keyword arguments:
@@ -22,12 +22,14 @@ def downloadPackage(packageUrl, downloadFolder):
         '''Check if the ~/Downloads/CoderDojoSoftware exists and eventually create it'''
         os.makedirs(downloadFolder)
 
-    urlSlice = urlparse(packageUrl)
-    fileName = os.path.split(urlSlice.path)
+    if (fileName == ""):
+        urlSlice = urlparse(packageUrl)
+        fileName = os.path.split(urlSlice.path)
+        fileName = fileName[1]
 
     # TODO: implement also a step --  if not os.file.exists(downloadFolder + fileName)
 
-    return urllib.urlretrieve(packageUrl, downloadFolder + fileName[1])
+    return urllib.urlretrieve(packageUrl, downloadFolder + fileName)
 
 packages = dict()
 packages["Scratch"] = {
@@ -117,21 +119,22 @@ packages["RaspberryPI"] = {
     },
     "WinSCP-5.5.6": {
         "Windows": ["http://winscp.net/download/winscp556setup.exe"]
-    },
-    "RealVNC-5.2.2": {
-        "Linux": [
-            "https://www.realvnc.com/download/binary/1674/",
-            "https://www.realvnc.com/download/binary/1675/",
-            "https://www.realvnc.com/download/binary/1676/",
-            "https://www.realvnc.com/download/binary/1677/"
-        ],
-        "Mac": ["https://www.realvnc.com/download/binary/1673/"],
-        "Windows": [
-            "https://www.realvnc.com/download/binary/1669/",
-            "https://www.realvnc.com/download/binary/1671/"
-        ]
     }
 }
+
+#    },
+#    "RealVNC-5.2.2": {
+#        "Linux": [
+#            "https://www.realvnc.com/download/binary/1674/",
+#            "https://www.realvnc.com/download/binary/1675/",
+#            "https://www.realvnc.com/download/binary/1676/",
+#            "https://www.realvnc.com/download/binary/1677/"
+#        ],
+#        "Mac": ["https://www.realvnc.com/download/binary/1673/"],
+#        "Windows": [
+#            "https://www.realvnc.com/download/binary/1669/",
+#            "https://www.realvnc.com/download/binary/1671/"
+#        ]
 
 for packageName in packages:
     print "Downloading the package: ", packageName
@@ -143,6 +146,6 @@ for packageName in packages:
                 print "\t\t\tFrom URL: ", packageUrl
                 downloadFolder = baseFolder + packageName + os.path.sep + release + os.path.sep + target + os.path.sep
                 print "\t\t\tTo folder: ", downloadFolder
-                downloadPackage(packageUrl, downloadFolder)
+                #downloadPackage(packageUrl, downloadFolder)
 
 print "Downloads completed!"

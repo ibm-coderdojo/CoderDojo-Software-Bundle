@@ -117,24 +117,26 @@ packages["RaspberryPI"] = {
             "ftp://ftp.chiark.greenend.org.uk/users/sgtatham/putty-latest/x86/putty-0.63-installer.exe"
         ]
     },
+    "RealVNC-5.2.2": {
+        "Linux": [
+            ["https://www.realvnc.com/download/binary/1674/", "VNC-Viewer-5.2.2-Linux-x86.gz"],
+            ["https://www.realvnc.com/download/binary/1675/", "VNC-Viewer-5.2.2-Linux-x86"],
+            ["https://www.realvnc.com/download/binary/1676/", "VNC-Viewer-5.2.2-Linux-x64.gz"],
+            ["https://www.realvnc.com/download/binary/1677/", "VNC-Viewer-5.2.2-Linux-x64"]
+        ],
+        "Mac": [
+            ["https://www.realvnc.com/download/binary/1673/", "VNC-Viewer-5.2.2-MacOSX.dmg"]
+        ],
+        "Windows": [
+            ["https://www.realvnc.com/download/binary/1669/", "VNC-Viewer-5.2.2-Windows-32bit.exe"],
+            ["https://www.realvnc.com/download/binary/1671/", "VNC-Viewer-5.2.2-Windows-64bit.exe"]
+        ]
+    },
     "WinSCP-5.5.6": {
         "Windows": ["http://winscp.net/download/winscp556setup.exe"]
     }
 }
 
-#    },
-#    "RealVNC-5.2.2": {
-#        "Linux": [
-#            "https://www.realvnc.com/download/binary/1674/",
-#            "https://www.realvnc.com/download/binary/1675/",
-#            "https://www.realvnc.com/download/binary/1676/",
-#            "https://www.realvnc.com/download/binary/1677/"
-#        ],
-#        "Mac": ["https://www.realvnc.com/download/binary/1673/"],
-#        "Windows": [
-#            "https://www.realvnc.com/download/binary/1669/",
-#            "https://www.realvnc.com/download/binary/1671/"
-#        ]
 
 for packageName in packages:
     print "Downloading the package: ", packageName
@@ -143,9 +145,14 @@ for packageName in packages:
         for target in packages[packageName][release]:
             print "\t\ttarget: ", target
             for packageUrl in packages[packageName][release][target]:
+                fileName = ""
+                if (type(packageUrl) == list):
+                    fileName = packageUrl[1]
+                    packageUrl = packageUrl[0]
+
                 print "\t\t\tFrom URL: ", packageUrl
                 downloadFolder = baseFolder + packageName + os.path.sep + release + os.path.sep + target + os.path.sep
                 print "\t\t\tTo folder: ", downloadFolder
-                downloadPackage(packageUrl, downloadFolder)
+                downloadPackage(packageUrl, downloadFolder, fileName)
 
 print "Downloads completed!"

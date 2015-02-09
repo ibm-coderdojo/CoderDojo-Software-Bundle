@@ -8,7 +8,7 @@ echo Begin  [$(date --date=@${startTime})] ...
 echo
 
 
-root="~/Downloads/CoderDojoSoftware"
+root="$(eval echo ~${USER})/Downloads/CoderDojoSoftware"
 
 ### Log Errors
 function error_log(){

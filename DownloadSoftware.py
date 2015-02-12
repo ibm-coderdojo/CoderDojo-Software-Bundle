@@ -135,6 +135,9 @@ packages["RaspberryPI"] = {
     "WinSCP-5.5.6": {
         "Windows": ["http://winscp.net/download/winscp556setup.exe"]
     }
+    "Xming-6.9.0.31": {
+        "Windows": ["http://downloads.sourceforge.net/project/xming/Xming/6.9.0.31/Xming-6-9-0-31-setup.exe"]
+    }
 }
 
 
